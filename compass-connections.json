@@ -1,0 +1,24 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "b22b4c56-ff7f-4f3d-915a-3e6341cd2dcc",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1777915780333"
+        }
+      },
+      "favorite": {
+        "name": "cluster0.jcx5ppr.mongodb.net"
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb+srv://myrayzsiza@cluster0.jcx5ppr.mongodb.net/",
+        "oidc": {}
+      }
+    }
+  ]
+}

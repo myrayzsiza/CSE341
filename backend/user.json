@@ -1,0 +1,26 @@
+﻿[
+  {
+    "_id": {
+      "$oid": "621fe1f527d68ebb24438395"
+    },
+    "professionalName": "Bamutesiza Raymond",
+    "base64Image": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAE0lEQVR42mP8z/C/HwAF/gL+qqjeJwAAAABJRU5ErkJggg==",
+    "nameLink": {
+      "firstName": "Bamutesiza Raymond",
+      "url": "https://www.linkedin.com/in/raymond-bamutesiza-127136357"
+    },
+    "primaryDescription": " - Full Stack Developer building APIs for frontend apps.",
+    "workDescription1": "Experienced in Node.js, Express, and REST API design.",
+    "workDescription2": "Currently creating a backend for a complete frontend in CSE341.",
+    "linkTitleText": "Connect with me:",
+    "linkedInLink": {
+      "text": "LinkedIn",
+      "link": "https://www.linkedin.com/in/raymond-bamutesiza-127136357"
+    },
+    "githubLink": {
+      "text": "GitHub",
+      "link": "https://github.com/myrayzsiza/CSE341"
+    },
+    "contactText": "Thank you for visiting my portfolio backend."
+  }
+]
