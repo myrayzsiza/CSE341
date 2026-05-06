@@ -1,31 +1,45 @@
 const { MongoClient } = require('mongodb');
 
 let db;
+let client;
 
-const initDb = (callback) => {
+const initDb = async () => {
   if (db) {
-    console.log('Db is already initialized!');
-    return callback(null, db);
+    return db;
   }
 
-  MongoClient.connect(process.env.MONGODB_URI, (err, client) => {
-    if (err) {
-      return callback(err);
-    }
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error('MONGODB_URI is not defined');
+  }
 
-    db = client.db('contacts');
-    callback(null, db);
+  client = new MongoClient(uri, {
+    connectTimeoutMS: 10000,
+    serverSelectionTimeoutMS: 10000,
   });
+
+  await client.connect();
+  db = client.db(process.env.MONGODB_DB || 'contacts');
+  return db;
 };
 
 const getDb = () => {
   if (!db) {
-    throw Error('Db not initialized');
+    throw new Error('Db not initialized');
   }
   return db;
+};
+
+const closeDb = async () => {
+  if (client) {
+    await client.close();
+    client = null;
+    db = null;
+  }
 };
 
 module.exports = {
   initDb,
   getDb,
+  closeDb,
 };

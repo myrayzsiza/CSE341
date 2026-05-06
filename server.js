@@ -20,15 +20,19 @@ app.get('/', (req, res) => {
 
 // Start server after MongoDB connection is initialized
 const PORT = process.env.PORT || 3000;
-db.initDb((err) => {
-  if (err) {
-    console.error('Failed to initialize database', err);
+
+const startServer = async () => {
+  try {
+    await db.initDb();
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to initialize database:', error.message || error);
     process.exit(1);
   }
+};
 
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-});
+startServer();
 
 module.exports = app;
