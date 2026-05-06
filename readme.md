@@ -95,7 +95,9 @@ Returns a single contact by MongoDB ID.
 3. Set environment variables in Render dashboard:
    - `MONGODB_URI`: Your MongoDB Atlas connection string
    - `PORT`: 3000 (or desired port)
-4. Deploy
+   - `MONGODB_DB`: contacts (optional, defaults to `contacts`)
+4. Ensure Render uses `npm install && npm run build` as the build command and `npm start` as the start command.
+5. Deploy
 
 The application is ready for Render deployment with no hardcoded credentials.
 
