@@ -38,8 +38,16 @@ const closeDb = async () => {
   }
 };
 
+const getClient = () => {
+  if (!client) {
+    throw new Error('MongoClient has not been connected');
+  }
+  return client;
+};
+
 module.exports = {
   initDb,
   getDb,
+  getClient,
   closeDb,
 };

@@ -10,8 +10,8 @@ const client = new MongoClient(uri);
 async function seedDatabase() {
   try {
     await client.connect();
-    const database = client.db();
-    const collection = database.collection('user');
+    const database = client.db('contacts');
+    const collection = database.collection('contacts');
 
     // Clear existing data
     await collection.deleteMany({});
