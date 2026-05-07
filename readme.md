@@ -24,14 +24,28 @@ A Node.js Express API for managing contacts stored in MongoDB.
 npm install
 ```
 
-### 2. Configure Environment Variables
-Create a `.env` file in the project root:
-```
-MONGODB_URI=mongodb+srv://your-username:your-password@your-cluster.mongodb.net/contacts?retryWrites=true&w=majority
+### 2. Create a MongoDB Atlas Cluster
+1. Sign in to MongoDB Atlas.
+2. Create a free cluster (M0) if you do not already have one.
+3. Create a database user in Atlas under `Database Access`.
+4. Add your IP address or allow access from anywhere in `Network Access`.
+5. Under `Clusters`, click `Connect` → `Connect your application`.
+6. Copy the connection string and replace the placeholders.
+
+### 3. Configure Environment Variables
+Create a `.env` file in the project root with the following values:
+```bash
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/contacts?retryWrites=true&w=majority
 PORT=3000
+MONGODB_DB=contacts
 ```
 
-### 3. Run the Application
+### 4. Seed the Database
+```bash
+npm run seed
+```
+
+### 5. Run the Application
 ```bash
 npm start
 ```
@@ -40,6 +54,11 @@ For development with auto-reload:
 ```bash
 npm run dev
 ```
+
+### 6. Verify the Database
+1. In Atlas, go to `Collections`.
+2. Open the `contacts` database.
+3. Confirm the `contacts` collection contains at least 3 documents.
 
 ## API Endpoints
 
@@ -54,7 +73,8 @@ Returns all contacts from the database.
     "firstName": "John",
     "lastName": "Doe",
     "email": "john@example.com",
-    "phone": "123-456-7890"
+    "favoriteColor": "Blue",
+    "birthday": "1990-05-10"
   }
 ]
 ```
@@ -72,14 +92,45 @@ Returns a single contact by MongoDB ID.
   "firstName": "John",
   "lastName": "Doe",
   "email": "john@example.com",
-  "phone": "123-456-7890"
+  "favoriteColor": "Blue",
+  "birthday": "1990-05-10"
 }
 ```
 
-**Error Responses:**
-- `400`: Invalid contact ID format
-- `404`: Contact not found
-- `500`: Server error
+### POST /contacts
+Creates a new contact.
+
+**Request Body:**
+```json
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice.johnson@example.com",
+  "favoriteColor": "Blue",
+  "birthday": "1990-02-14"
+}
+```
+
+### PUT /contacts/:id
+Updates an existing contact.
+
+**Request Body:**
+```json
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice.updated@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1990-02-14"
+}
+```
+
+### DELETE /contacts/:id
+Deletes a contact by ID.
+
+## API Documentation
+
+Swagger docs are available at `/api-docs` after the server starts.
 
 ## Security Features
 

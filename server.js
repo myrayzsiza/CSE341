@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const db = require('./db/connection');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs/swagger');
 
 dotenv.config();
 
@@ -12,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use('/contacts', contactsRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Health check endpoint
 app.get('/', (req, res) => {
