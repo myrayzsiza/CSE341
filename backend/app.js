@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const mongodb = require('./db/connect');
+const mongodb = require('./db/connect');
 const professionalRoutes = require('./routes/professional');
 
 const port = process.env.PORT || 8080;
@@ -14,11 +14,11 @@ app
   })
   .use('/professional', professionalRoutes);
 
-// mongodb.initDb((err, mongodb) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
+mongodb.initDb((err, mongodb) => {
+  if (err) {
+    console.log(err);
+  } else {
     app.listen(port);
     console.log(`Connected to DB and listening on ${port}`);
-//   }
-// });
+  }
+});
