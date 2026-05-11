@@ -10,6 +10,10 @@ const swaggerDefinition = {
       url: 'http://localhost:3000',
       description: 'Local development server',
     },
+    {
+      url: 'https://cse341-contacts-api.onrender.com',
+      description: 'Production server (Render)',
+    },
   ],
 };
 
