@@ -25,6 +25,20 @@ const sampleContacts = [
     favoriteColor: 'Red',
     birthday: '1995-11-05',
   },
+  {
+    firstName: 'Leo',
+    lastName: 'Chen',
+    email: 'leo.chen@example.com',
+    favoriteColor: 'Yellow',
+    birthday: '1992-03-18',
+  },
+  {
+    firstName: 'Maya',
+    lastName: 'Patel',
+    email: 'maya.patel@example.com',
+    favoriteColor: 'Purple',
+    birthday: '1985-10-30',
+  },
 ];
 
 const seedContacts = async () => {
