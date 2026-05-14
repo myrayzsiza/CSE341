@@ -3,7 +3,7 @@ const dns = require('dns');
 
 dns.setServers(['8.8.8.8']);
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 const MongoClient = require('mongodb').MongoClient;
 
 let _db;
