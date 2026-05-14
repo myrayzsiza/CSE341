@@ -1,9 +1,10 @@
 const dotenv = require('dotenv');
 const dns = require('dns');
+const path = require('path');
 
 dns.setServers(['8.8.8.8']);
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const MongoClient = require('mongodb').MongoClient;
 
 let _db;
@@ -13,7 +14,13 @@ const initDb = (callback) => {
     console.log('Db is already initialized!');
     return callback(null, _db);
   }
-  MongoClient.connect(process.env.MONGODB_URI)
+
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    return callback(new Error('MONGODB_URI is not defined'));
+  }
+
+  MongoClient.connect(uri)
     .then((client) => {
       _db = client;
       callback(null, _db);
