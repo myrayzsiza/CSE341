@@ -1,12 +1,23 @@
 // helpful link for converting image to base64: https://elmah.io/tools/base64-image-encoder/
 async function apiFetch(url) {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('API fetch failed:', error);
+    throw error;
+  }
 }
 
+const apiBaseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
+  ? 'http://localhost:8080'
+  : 'https://cse341-df62.onrender.com';
+
 const getData = async () => {
-  const data = await apiFetch('http://localhost:8080/professional');
+  const data = await apiFetch(`${apiBaseUrl}/professional`);
   displayAllData(data);
 };
 

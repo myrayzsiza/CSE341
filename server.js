@@ -8,6 +8,7 @@ dotenv.config();
 
 const app = express();
 const contactsRoutes = require('./routes/contacts');
+const professionalRoutes = require('./backend/routes/professional');
 
 // Middleware
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.use('/professional', professionalRoutes);
 app.use('/contacts', contactsRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -40,6 +42,7 @@ const startServer = async () => {
     await db.initDb();
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
+      console.log(`Node env: ${process.env.NODE_ENV || 'not set'}`);
     });
   } catch (error) {
     console.error('Failed to initialize database:', error.message || error);
