@@ -7,12 +7,16 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: 'http://localhost:3000',
-      description: 'Local development server',
+      url: 'https://cse341-df62.onrender.com',
+      description: 'Production server (Render - current)',
     },
     {
       url: 'https://cse341-contacts-api.onrender.com',
-      description: 'Production server (Render)',
+      description: 'Production server (alternate)',
+    },
+    {
+      url: 'http://localhost:3000',
+      description: 'Local development server',
     },
   ],
 };
@@ -181,9 +185,63 @@ const swaggerDocument = {
         },
       },
     },
+    '/professional': {
+      get: {
+        summary: 'Get professional profile data',
+        responses: {
+          200: {
+            description: 'Professional profile data',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Professional',
+                },
+              },
+            },
+          },
+          500: {
+            description: 'Server error',
+          },
+        },
+      },
+    },
   },
   components: {
     schemas: {
+      Professional: {
+        type: 'object',
+        properties: {
+          _id: { type: 'string' },
+          professionalName: { type: 'string' },
+          base64Image: { type: 'string' },
+          nameLink: {
+            type: 'object',
+            properties: {
+              firstName: { type: 'string' },
+              url: { type: 'string' },
+            },
+          },
+          primaryDescription: { type: 'string' },
+          workDescription1: { type: 'string' },
+          workDescription2: { type: 'string' },
+          linkTitleText: { type: 'string' },
+          linkedInLink: {
+            type: 'object',
+            properties: {
+              text: { type: 'string' },
+              link: { type: 'string' },
+            },
+          },
+          githubLink: {
+            type: 'object',
+            properties: {
+              text: { type: 'string' },
+              link: { type: 'string' },
+            },
+          },
+          contactText: { type: 'string' },
+        },
+      },
       Contact: {
         type: 'object',
         properties: {

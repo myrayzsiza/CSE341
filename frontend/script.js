@@ -12,9 +12,10 @@ async function apiFetch(url) {
   }
 }
 
+// Use a relative API path in production so the frontend can be served from the same origin.
 const apiBaseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
   ? 'http://localhost:8080'
-  : 'https://cse341-df62.onrender.com';
+  : '';
 
 const getData = async () => {
   const data = await apiFetch(`${apiBaseUrl}/professional`);

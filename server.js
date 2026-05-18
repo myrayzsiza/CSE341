@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const db = require('./db/connection');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/swagger');
+const path = require('path');
 
 dotenv.config();
 
@@ -24,14 +25,23 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, 'frontend')));
+
 // Routes
 app.use('/professional', professionalRoutes);
 app.use('/contacts', contactsRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Health check endpoint
+// Serve index.html for the root (frontend)
 app.get('/', (req, res) => {
-  res.status(200).send('Server is running');
+  // Redirect root to Swagger UI so you can interact with the API in production
+  res.redirect('/api-docs');
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ message: 'Server is running' });
 });
 
 // Start server after MongoDB connection is initialized
