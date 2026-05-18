@@ -29,7 +29,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Health check endpoint
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Contacts API is running' });
+  res.status(200).send('Server is running');
 });
 
 // Start server after MongoDB connection is initialized
